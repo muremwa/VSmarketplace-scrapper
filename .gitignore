@@ -1,3 +1,6 @@
 .idea/*
 tr/*
 *.pyc
+build/*
+dist/*
+marketplace_scrapper.*/*

@@ -1,26 +1,20 @@
 from typing import Dict, Any
 from urllib import request
 from urllib.error import HTTPError
-import json
 import re
 
 
-def m_address(extension_id: str) -> str:
+def _m_address(extension_id: str) -> str:
     """get the marketplace URL loaded with the extension ID"""
     if not re.search(r'.*?\..*?', extension_id):
         raise ValueError('Incorrect extension ID')
 
-    ad_f_p = re.split(r'\\\w+\.\w+', __file__)[0]
-    ad_file = f"{ad_f_p}\\val/address.json"
-
-    with open(ad_file, 'r') as ad_f:
-        ads: dict = json.load(ad_f)
-        ad = ads.get('url', '')
+    ad = "https://marketplace.visualstudio.com/items?itemName="
 
     return f'{ad}{extension_id}'
 
 
-def extract_details(text: str) -> Dict[str, Any]:
+def _extract_details(text: str) -> Dict[str, Any]:
     """Get text and extract the title, publisher, image, installs"""
     title, ps_name, img, installs = None, None, None, None
 
@@ -40,7 +34,7 @@ def extract_details(text: str) -> Dict[str, Any]:
         img = _img[0]
 
     # extract installs
-    _installs = re.findall(r'<span\s+class="installs-text".*?>\s*(.*?)\s{1}installs</span>', text, re.M)
+    _installs = re.findall(r'<span\s+class="installs-text".*?>\s*(.*?)\sinstalls</span>', text, re.M)
     if _installs:
         _in: str = _installs[0]
         installs = int(_in.replace(',', ''))
@@ -53,7 +47,7 @@ def extract_details(text: str) -> Dict[str, Any]:
     }
 
 
-def retrieve_extension_page(url: str) -> str:
+def _retrieve_extension_page(url: str) -> str:
     """
     gets the url of an extension in the marketplace and returns string of its HTML code.
     URL is typically the result of m_address function

@@ -1,5 +1,5 @@
 import unittest
-from src.scrap import m_address, extract_details, retrieve_extension_page
+from vscrap._scrap import _m_address, _extract_details, _retrieve_extension_page
 
 
 class MyTestCase(unittest.TestCase):
@@ -9,9 +9,9 @@ class MyTestCase(unittest.TestCase):
     def test_m_address(self):
         ins = ['MS-vsliveshare.vsls-vs', 'MadsKristensen.AddNewFile', 'wix.vscode-import-cost', 'namedfe']
         for _id in ins[:3]:
-            self.assertEqual(f'{self.address}{_id}', m_address(_id))
+            self.assertEqual(f'{self.address}{_id}', _m_address(_id))
 
-        self.assertRaises(ValueError, m_address, ins[-1])
+        self.assertRaises(ValueError, _m_address, ins[-1])
 
     def test_extract_details(self):
         texts = []
@@ -52,12 +52,12 @@ class MyTestCase(unittest.TestCase):
                 texts.append(line)
 
         for text, res in zip(texts, exp_res):
-            self.assertDictEqual(res, extract_details(text))
+            self.assertDictEqual(res, _extract_details(text))
 
     def test_retrieve_extension_page(self):
         urls = ['https://www.google.com/', 'https://www.google.com/search?q=home']
-        self.assertEqual(str, type(retrieve_extension_page(urls[0])))
-        self.assertEqual(None, retrieve_extension_page(urls[-1]))
+        self.assertEqual(str, type(_retrieve_extension_page(urls[0])))
+        self.assertEqual(None, _retrieve_extension_page(urls[-1]))
 
 
 if __name__ == '__main__':

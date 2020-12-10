@@ -9,13 +9,19 @@ Details are:
 All you need is the extension ID eg: `muremwa.read-urls`  
 The extension ID is called the __'Unique Identifier'__.
 
+## Installation
+You can install using pip.
+```commandline
+pip install marketplace-scrapper
+```
+
 ## Usage
 ### In python code.  
 Import the main function.
 ```python
-from src.main import main
+import vscrap
 
-details = main('muremwa.read-urls')
+details = vscrap.get_extension_details('muremwa.read-urls')
 
 ```
 The main function returns a dict with the details as described above.
@@ -24,10 +30,10 @@ The main function returns a dict with the details as described above.
 
 
 ### In command line
- Use the `read_ext.py` file and add one argument extension ID.
+Use the ``scrap.extension`` module and add one argument, the extension ID.
  
  ```commandline
-python read_ext.py muremwa.read-urls
+python -m scrap.extension muremwa.read-urls
 ```
 
 ![Looks like this in commandline](img/cmd_look.jpg)
