@@ -1,4 +1,4 @@
-# Visual Studio Marketplace Scrapper.
+# Visual Studio Marketplace Scraper.
 Get the details of an extension from `marketplace.visualstudio.com`.  
 Details are:
 1. Extension title: `title: STRING`
